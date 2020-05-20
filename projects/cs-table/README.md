@@ -22,3 +22,49 @@ Run `ng test cs-table` to execute the unit tests via [Karma](https://karma-runne
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+## Usage
+Steps:
+1. npm i cs-table
+2. In your module:
+    import { CsTableModule } from 'cs-table';
+
+    create a service file that will return all the component referent to be added dynamically:
+    in module:
+    import { ComponentLoaderService } from './shared/services/component-loader.service';
+
+
+    in decorator imports section add following:
+
+    CsTableModule.forRoot({
+      components: ComponentLoaderService.getComponent,
+      apiBase: 'http://localhost:8081'
+    })
+    "apiBase" is your base api url to append "/filters/pageId" & "/tables/pageId"
+
+3. In component file:
+    //Add table configurations
+    export class AppComponent {
+    JSON = JSON;
+    pageId = 1;
+    tableConfig = {
+        "pageId" : null,
+        "ps": 10,
+        "pn": 1,
+        "search": [] 
+    };
+    //Output to be called when ever the default-checkbox(of table) is clicked 
+    rowSelected(row) {
+        console.log(row)
+    }
+    //After getting already-saved-filters set pageId
+    filterUpdate(filterData) {
+        this.tableConfig.search = filterData;
+        this.tableConfig.pageId = this.pageId;
+    }
+    }
+
+4. To test run the server using : node server.js
+    server files are here: https://github.com/gitoutofbox/cs-table-lib-use/tree/master/csTable-server
+
+5. set databse: 
