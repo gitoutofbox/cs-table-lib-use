@@ -1,0 +1,21 @@
+.autoComplete-main{
+    position:relative;
+    height: 100%;
+}
+.input-wrap{
+    position: relative;
+}
+i{position: absolute; right: 5px; top:10px;}
+.results{
+    max-height: 100px;    
+    overflow: auto;
+}
+ul{
+    padding:0;
+    margin: 0;
+    
+}
+ul li{
+    padding: 5px;
+    cursor: pointer;
+}

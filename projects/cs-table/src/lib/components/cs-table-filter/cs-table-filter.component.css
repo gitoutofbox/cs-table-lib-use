@@ -1,0 +1,45 @@
+.cs-filter-overlay{
+    background: transparent;
+    position: absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height: 100%;
+    z-index:1;
+}
+.filter-selection{
+    position:relative;
+}
+.close {
+    position: absolute;
+    right: 5px;
+    top:5px;
+    cursor: pointer;
+}
+.filter-block{
+    display: inline-block;
+    position: absolute;
+    z-index: 2;
+}
+ul{
+    padding:0;
+    margin: 0;
+}
+ul li {
+    list-style-type: none;
+    /* padding: 5px 0; */
+    cursor: pointer;
+}
+
+.selected-filters {
+    display: inline-block;
+}
+.selected-filters li{
+    display:inline-block;
+    list-style-type: none;
+    cursor: pointer;
+}
+.filter-selection .selected-filters li .remove-filter {
+    cursor: pointer;
+    z-index: 1;
+}

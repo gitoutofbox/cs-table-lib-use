@@ -1,0 +1,14 @@
+<div class="filter-single-main  filter-dropdown-main">
+    <div class="header"> {{data?.filterLabel}} </div>
+    <div class="body">
+        <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+        <select name="select-{{data?.key}}" [(ngModel)]="filterSelected">
+            <option value="">Select</option>
+            <option [value]="option[data.key]" *ngFor="let option of options">{{option[data.key]}}</option>
+        </select>
+        <div class="footer text-right">
+            <button class="btn btn-small btn-primary" (click)="go()">APPLY</button>
+            <!-- <button class="btn btn-small btn-default" (click)="cancel()">Remove</button> -->
+        </div>
+    </div>
+</div>

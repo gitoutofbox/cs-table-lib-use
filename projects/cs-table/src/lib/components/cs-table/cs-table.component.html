@@ -1,0 +1,35 @@
+<ng-container *ngIf="pageId && pageId !== 'undefined' && pageId !== ''">
+    <table width="100%" border="0" class="cs-table">
+        <thead>
+            <tr>
+                <th><input type="checkbox" (change)="checkAll($event)" /></th>
+                <th *ngFor="let col of columns" [width]="col.width">
+                    {{col.label}}
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of tableData">
+                <td><input type="checkbox" [checked]="row.selected" (change)="checkSingle(row)" /></td>
+                <ng-container *ngFor="let col of columns">
+                    <td>
+                        <div *ngIf="col.type === 'component'; else textField">
+
+                            <span class="cell-component" *ngFor="let component of col.components">
+                                <app-component-loader [component]="component" [availableComponents]="components" [data]="row">
+                                </app-component-loader>
+                            </span>
+                            
+
+
+
+                        </div>
+                        <ng-template #textField>
+                            <div>{{row[col.key]}}</div>
+                        </ng-template>
+                    </td>
+                </ng-container>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>

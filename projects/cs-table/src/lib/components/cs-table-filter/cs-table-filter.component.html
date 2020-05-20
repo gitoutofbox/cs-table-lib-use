@@ -1,0 +1,25 @@
+<div class="cs-filter filter-main">
+    <div class="filter-selection" (click)="$event.stopPropagation()">
+        <ul class="selected-filters">
+            <li *ngFor="let filter of getSelectedFilters(filters)" (click)="showSingleFilter = true; positionFilter($event); addFilter(filter); filterOpened = true; ">
+                <span class="filter-label">{{filter.filterLabel}}</span>: 
+                <span class="filter-value">{{filter.filterSelected}}</span>
+                <span class="remove-filter" (click)="removeFilter($event, filter)">x</span>
+            </li>
+        </ul>
+        <button class="btn btn-primary add-filter-btn" (click)="positionFilter($event); filterOpened = true">+Filter</button>
+        <div class="filter-block" [ngStyle]="{'visibility': filterOpened ?  'visible' : 'hidden', 'top': position?.top, 'left': position?.left+'px'}">
+            <!-- <a class="close" (click)="close()">x</a> -->
+            <div class="all-filters" *ngIf="!showSingleFilter">
+                <div class="header">Select filter</div>
+                <ul class="available-filters">
+                    <li *ngFor="let filter of getNotSelectedFilters(filters)">
+                        <div class="btn btn-lilnk" (click)="addFilter(filter)">{{filter.filterLabel}}</div>
+                    </li>
+                </ul>
+            </div>
+           <ng-container  #componentHost></ng-container>
+        </div>
+    </div>
+</div>
+<div class="cs-filter-overlay" *ngIf="filterOpened"></div>

@@ -17,7 +17,15 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "cs-table": [
+        "dist/cs-table/cs-table",
+        "dist/cs-table",
+        "dist/cs-table/cs-table",
+        "dist/cs-table"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
