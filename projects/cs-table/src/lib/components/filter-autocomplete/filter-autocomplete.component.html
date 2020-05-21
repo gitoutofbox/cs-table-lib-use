@@ -12,10 +12,10 @@
             <ul>
                 <li *ngFor="let item of items" (click)="selectItem(item)">{{item[_data.key]}}</li>
             </ul>
-        </div>
-        <div class="footer text-right">
-            <button class="btn btn-small btn-primary" (click)="go()">APPLY</button>
-            <!-- <button class="btn btn-small btn-default" (click)="cancel()">Remove</button> -->
-        </div>
+        </div>        
+    </div>
+    <div class="footer text-right">
+        <button class="btn btn-small btn-primary" (click)="go()">APPLY</button>
+        <!-- <button class="btn btn-small btn-default" (click)="cancel()">Remove</button> -->
     </div>
 </div>

@@ -67,4 +67,10 @@ Steps:
 4. To test run the server using : node server.js
     server files are here: https://github.com/gitoutofbox/cs-table-lib-use/tree/master/csTable-server
 
-5. set databse: 
+5. set databse, create DB & table:
+    here is the (mysql) file: https://github.com/gitoutofbox/cs-table-lib-use/blob/master/angular_architecture.sql
+
+6. Add css: open your angular.json file or index file and add follwing css:
+    "node_modules/cs-table/css/style.css"
+    
+7. For reference check:  https://github.com/gitoutofbox/cs-table-lib-use/tree/master/projects/lib-test/src

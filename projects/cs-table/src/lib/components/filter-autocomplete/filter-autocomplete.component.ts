@@ -1,7 +1,9 @@
-import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { CsTableConfig } from '../../configs/config';
+import { CS_TABLE_TOKEN } from '../../configs/config';
 
 @Component({
   selector: 'filter-autocomplete',
@@ -10,7 +12,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class FilterAutocompleteComponent implements OnInit {
   public filterSelected: any;
-  public apiBase: string = 'http://localhost:8081';
+  public apiBase: string;// = 'http://localhost:8081';
   public options: Array<any> = [];
   public value: any = '';
   public _data: any;    
@@ -35,7 +37,12 @@ export class FilterAutocompleteComponent implements OnInit {
 
   
   
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,    
+    @Inject(CS_TABLE_TOKEN) private csTableConfig: CsTableConfig
+    ) { 
+      this.apiBase = this.csTableConfig.apiBase;
+    }
 
   
   ngOnInit() {
@@ -71,8 +78,5 @@ export class FilterAutocompleteComponent implements OnInit {
   cancel() {
     this.onCancelFilter.emit({data:this._data, value:''});
     this.errorMessage = ''; 
-  }
-  ngOnDestroy() {
-    this.errorMessage = '';
   }
 }

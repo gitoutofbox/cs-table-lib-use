@@ -4,14 +4,19 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CsTableComponent } from './components/cs-table/cs-table.component';
 import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
+import { DatePipe } from '@angular/common';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+import {CS_TABLE_TOKEN} from './configs/config';
+import {CsTableConfig} from './configs/config';
 
 import { CsTableFilterComponent } from './components/cs-table-filter/cs-table-filter.component';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
 import { FilterTextComponent } from './components/filter-text/filter-text.component';
 import { FilterAutocompleteComponent } from './components/filter-autocomplete/filter-autocomplete.component';
-// require('src/lib/css/style.css')
-import {CS_TABLE_TOKEN} from './configs/config';
-import {CsTableConfig} from './configs/config';
+import { FilterDateComponent } from './components/filter-date/filter-date.component';
 
 @NgModule({
   declarations: [
@@ -20,13 +25,16 @@ import {CsTableConfig} from './configs/config';
     CsTableFilterComponent, 
     FilterDropdownComponent, 
     FilterTextComponent, 
-    FilterAutocompleteComponent
+    FilterAutocompleteComponent, FilterDateComponent
   ],
   imports: [
     CommonModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    BsDatepickerModule.forRoot(),
   ],
+  providers: [DatePipe],
   exports: [
     CsTableComponent, 
     ComponentLoaderComponent, 

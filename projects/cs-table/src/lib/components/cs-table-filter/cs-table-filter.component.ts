@@ -1,11 +1,15 @@
 import { Component, OnInit, EventEmitter, ComponentFactoryResolver, ViewChild, ViewContainerRef, HostListener, Output, ElementRef, Inject, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
 import { FilterTextComponent } from '../filter-text/filter-text.component';
 import { FilterAutocompleteComponent } from '../filter-autocomplete/filter-autocomplete.component';
+import { FilterDateComponent } from '../filter-date/filter-date.component';
+
 
 import { CS_TABLE_TOKEN } from '../../configs/config';
 import { CsTableConfig } from '../../configs/config';
+import { DatePipe } from '@angular/common';
 
 interface Filter {
   key: string;
@@ -35,13 +39,14 @@ export class CsTableFilterComponent implements OnInit {
   private componentMapping: Object = {
     dropdown: FilterDropdownComponent,
     text: FilterTextComponent,
-    autocomplete: FilterAutocompleteComponent
+    autocomplete: FilterAutocompleteComponent,
+    date: FilterDateComponent
   };
   private searchArr = [];
   @Input() pageId : string | number;
   @Output() onFilterUpdate: EventEmitter<any> = new EventEmitter();
   @ViewChild('componentHost', { static: true, read: ViewContainerRef } as any) componentHost: ViewContainerRef;
-  constructor(private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver, @Inject(CS_TABLE_TOKEN) private csTableConfig: CsTableConfig) {
+  constructor(private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver, @Inject(CS_TABLE_TOKEN) private csTableConfig: CsTableConfig, private datePipe: DatePipe) {
     this.apiBase = this.csTableConfig.apiBase;
   }
   
@@ -108,8 +113,9 @@ export class CsTableFilterComponent implements OnInit {
     // console.log('outputData', outputData)
     const key = outputData.data.key;
     const filterType = outputData.data.filterType;
-    const value = (outputData.value).trim();
-    const multipleType = ['typefirst', 'multiselect'];
+    const value = outputData.value;
+    const inType = ['typeahead', 'multiselect'];
+    const betweenType = ['date', 'number'];
     this.searchArr = this.searchArr.filter(item => item.search !== key)
     this.searchArr = this.searchArr.filter(item => item.value !== '')
 
@@ -119,21 +125,46 @@ export class CsTableFilterComponent implements OnInit {
       }
     })
 
-    if (multipleType.indexOf(filterType) !== -1 && value != '') {
-      this.searchArr.push({ search: key, value: `in|${value}` })
-      this.filters.map(item => {
-        if (item.key === key)
-          item['filterSelected'] = `in|${value}`;
-      })
-    } else if (value !== '') {
-      this.searchArr.push({ search: key, value: value });
+    let valueArr;
+    this.searchArr.push({ search: key, value: value });
       this.filters.map(item => {
         if (item.key === key) {
           item['filterSelected'] = value;
-        }
 
+          if(betweenType.indexOf(filterType) !== -1) {
+            valueArr = value.split('BETWEEN|');
+            valueArr = valueArr[1];
+            valueArr = valueArr.split(",");
+            const from = this.datePipe.transform(new Date(valueArr[0]),'MMM d, y');
+            const to = this.datePipe.transform(new Date(valueArr[1]),'MMM d, y');
+            item['filterSelectedDisplay'] = `${from}-${to}`;
+          } else {
+            item['filterSelectedDisplay'] = value;
+          }          
+        }
       })
-    }
+
+
+    // if (inType.indexOf(filterType) !== -1 && value != '') {
+    //   this.searchArr.push({ search: key, value: `in|${value}` })
+    //   this.filters.map(item => {
+    //     if (item.key === key)
+    //       item['filterSelected'] = `in|${value}`;
+    //   })
+    // } else if (betweenType.indexOf(filterType) !== -1 && value != '') {
+    //   this.searchArr.push({ search: key, value: `between|${value}` })
+    //   this.filters.map(item => {
+    //     if (item.key === key)
+    //       item['filterSelected'] = `between|${value}`;
+    //   })
+    // } else if (value !== '') {
+    //   this.searchArr.push({ search: key, value: value });
+    //   this.filters.map(item => {
+    //     if (item.key === key) {
+    //       item['filterSelected'] = value;
+    //     }
+    //   })
+    // }
 
 
     if (doEmit) { this.onFilterUpdate.emit(this.searchArr); }

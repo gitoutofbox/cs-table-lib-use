@@ -1,11 +1,11 @@
-<div class="filter-single-main  filter-dropdown-main">
+<div class="filter-single-main">
     <div class="header"> {{data?.filterLabel}} </div>
     <div class="body">
         <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
-        <select name="select-{{data?.key}}" class="form-control" [(ngModel)]="filterSelected">
-            <option value="">Select</option>
-            <option [value]="option[data.key]" *ngFor="let option of options">{{option[data.key]}}</option>
-        </select>        
+        <bs-daterangepicker-inline [bsValue]="filterSelected"
+         [bsConfig]="{selectFromOtherMonth: true}"
+            (bsValueChange)="onValueChange($event)">
+        </bs-daterangepicker-inline>
     </div>
     <div class="footer text-right">
         <button class="btn btn-small btn-primary" (click)="go()">APPLY</button>

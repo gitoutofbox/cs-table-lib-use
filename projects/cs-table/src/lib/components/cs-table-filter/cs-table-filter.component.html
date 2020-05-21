@@ -3,7 +3,7 @@
         <ul class="selected-filters">
             <li *ngFor="let filter of getSelectedFilters(filters)" (click)="showSingleFilter = true; positionFilter($event); addFilter(filter); filterOpened = true; ">
                 <span class="filter-label">{{filter.filterLabel}}</span>: 
-                <span class="filter-value">{{filter.filterSelected}}</span>
+                <span class="filter-value">{{filter.filterSelectedDisplay}}</span>
                 <span class="remove-filter" (click)="removeFilter($event, filter)">x</span>
             </li>
         </ul>

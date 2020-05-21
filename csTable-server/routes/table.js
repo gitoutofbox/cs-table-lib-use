@@ -44,13 +44,29 @@ exports.getData = (req, res) => {
 
 namespace = {
     createFilters: (search) => {
+        let valueArr;
         let where = ' WHERE 1= 1 ';
-        console.log('search', search)
-        for (let item of search) {
-            
-                where = `${where} AND ${item.search} = "${item.value}"`;
+       
+        // console.log('search', search)
+
+        for (let item of search) {  
+            valueArr = item.value;
+            valueArr = valueArr.split("|");
+            if(valueArr.length > 1) {
+                switch((valueArr[0]).toLowerCase()) {
+                    case 'between':                        
+                        let valueItems = valueArr[1].split(",");
+                        where = `${where} AND ${item.search} BETWEEN "${valueItems[0]}" AND "${valueItems[1]}"`;
+                        break;
+                }
+            } else {
+               where = `${where} AND ${item.search} = "${item.value}"`;
+            }
+
+               
            
         }
+        console.log(where)
         return where;
     }
 }

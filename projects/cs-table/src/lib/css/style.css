@@ -1,17 +1,18 @@
 /******************* table starts ***************************/.cs-table
-table {
+/* table {
     border: 1px solid #aaa;
     background: red;
     padding:0;
     border-collapse: collapse;
-}
+} */
 table.cs-table thead tr {
     background: #000;
     color: #fff;
+    border-collapse: collapse;
 }
 table.cs-table tbody tr:hover {background-color: #ddd;}
 table.cs-table thead tr th{
-    border-left: 1px solid #aaa;
+    /* border-left: 1px solid #aaa; */
     border-bottom: 1px solid #aaa;
     padding: 10px;
     text-align: left;
@@ -63,7 +64,7 @@ table.cs-table tbody tr td .cell-component:last-child{
     position: relative;
 }
 
-cs-filter .filter-selection .selected-filters li .remove-filter{
+.cs-filter .filter-selection .selected-filters li .remove-filter{
     visibility: hidden;
 }
 .cs-filter .filter-selection .selected-filters li .remove-filter:after {
@@ -106,6 +107,19 @@ cs-filter .filter-selection .selected-filters li .remove-filter{
 } */
 .cs-filter .filter-single-main {
     position: relative;
+    width: 100%;
+    float:left;
+}
+.cs-filter .filter-single-main select, 
+.cs-filter .filter-single-main input,
+.cs-filter .filter-single-main number {
+    width: 100%;
+}
+.cs-filter .filter-single-main .body {
+    width: auto;
+    height: 100%;
+    padding: 10px 8px;
+    margin-bottom: 20px;
 }
 
 .filter-single-main .header {
@@ -113,10 +127,7 @@ cs-filter .filter-selection .selected-filters li .remove-filter{
     color:#fff;   
     padding: 8px;
 }
-.cs-filter .filter-single-main .body {
-    height: 100%;
-    padding: 10px 8px;
-}
+    
 .cs-filter .filter-single-main .footer {
     position: absolute;
     bottom: 0;
@@ -124,6 +135,7 @@ cs-filter .filter-selection .selected-filters li .remove-filter{
     text-align: right;
     left:0; 
     right: 0;    
+    height: 10px;
 }
 .cs-filter .filter-single-main .footer button {
     border: 0;
@@ -131,6 +143,9 @@ cs-filter .filter-selection .selected-filters li .remove-filter{
     color: blue;
     cursor: pointer;
     font-weight: bold;
+}
+.cs-filter .filter-single-main .bs-datepicker{
+    box-shadow: 0;
 }
 /****** single filter ends *****/
 

@@ -64,7 +64,9 @@
               "projects/lib-test/src/assets"
             ],
             "styles": [
-              "projects/lib-test/src/styles.css"
+              "projects/lib-test/src/styles.css",
+              "node_modules/ngx-bootstrap/datepicker/bs-datepicker.css",
+              "dist/cs-table/css/style.css"
             ],
             "scripts": []
           },

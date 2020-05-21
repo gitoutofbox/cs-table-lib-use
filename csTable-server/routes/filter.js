@@ -5,7 +5,7 @@ exports.getFilters = (req, res) => {
     database.query(sql, (err, rows) => {
         if (err) { throw err; }
        
-        
+        // console.log(rows[0].columns)
         let filters = JSON.parse(rows[0].columns);
         filters = filters.filter(col => col.filter_enable).map(col => {
             if(col.filter_enable) {
