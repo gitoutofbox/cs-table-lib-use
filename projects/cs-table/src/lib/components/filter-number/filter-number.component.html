@@ -1,0 +1,15 @@
+<div class="filter-single-main filter-number">
+    <div class="header"> {{data?.filterLabel}} </div>
+    <div class="body">
+        <div class="error" *ngIf="errorMessage">{{errorMessage}}</div>
+        <div class="row">
+            <div class="col-sm-6"><label for="min">Min:</label> <input type="number" [(ngModel)]="filterSelectedMin"> &nbsp;</div>
+            <div class="col-sm-6"><label for="max">Max:</label> <input type="number" [(ngModel)]="filterSelectedMax"></div>
+        </div>
+        
+    </div>
+    <div class="footer text-right">
+        <button class="btn btn-small btn-primary" (click)="go()">APPLY</button>
+        <!-- <button class="btn btn-small btn-default" (click)="cancel()">Remove</button> -->
+    </div>
+</div>

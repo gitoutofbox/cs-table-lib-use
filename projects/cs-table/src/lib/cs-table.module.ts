@@ -17,6 +17,7 @@ import { FilterDropdownComponent } from './components/filter-dropdown/filter-dro
 import { FilterTextComponent } from './components/filter-text/filter-text.component';
 import { FilterAutocompleteComponent } from './components/filter-autocomplete/filter-autocomplete.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
+import { FilterNumberComponent } from './components/filter-number/filter-number.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { FilterDateComponent } from './components/filter-date/filter-date.compon
     CsTableFilterComponent, 
     FilterDropdownComponent, 
     FilterTextComponent, 
-    FilterAutocompleteComponent, FilterDateComponent
+    FilterAutocompleteComponent, FilterDateComponent, FilterNumberComponent
   ],
   imports: [
     CommonModule,

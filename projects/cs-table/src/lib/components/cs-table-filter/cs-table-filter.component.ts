@@ -10,6 +10,7 @@ import { FilterDateComponent } from '../filter-date/filter-date.component';
 import { CS_TABLE_TOKEN } from '../../configs/config';
 import { CsTableConfig } from '../../configs/config';
 import { DatePipe } from '@angular/common';
+import { FilterNumberComponent } from '../filter-number/filter-number.component';
 
 interface Filter {
   key: string;
@@ -34,22 +35,23 @@ export class CsTableFilterComponent implements OnInit {
   public filterOpened: boolean = false;
   public showSingleFilter: boolean = false;
 
-  public position = {top:0, left:0};
+  public position = { top: 0, left: 0 };
   private componentRef;
   private componentMapping: Object = {
     dropdown: FilterDropdownComponent,
     text: FilterTextComponent,
     autocomplete: FilterAutocompleteComponent,
-    date: FilterDateComponent
+    date: FilterDateComponent,
+    number: FilterNumberComponent
   };
   private searchArr = [];
-  @Input() pageId : string | number;
+  @Input() pageId: string | number;
   @Output() onFilterUpdate: EventEmitter<any> = new EventEmitter();
   @ViewChild('componentHost', { static: true, read: ViewContainerRef } as any) componentHost: ViewContainerRef;
   constructor(private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver, @Inject(CS_TABLE_TOKEN) private csTableConfig: CsTableConfig, private datePipe: DatePipe) {
     this.apiBase = this.csTableConfig.apiBase;
   }
-  
+
   @HostListener('document:click')
   clickout() {
     this.filterOpened && this.close();
@@ -125,24 +127,37 @@ export class CsTableFilterComponent implements OnInit {
       }
     })
 
-    let valueArr;
+    let valueArr, from, to;
     this.searchArr.push({ search: key, value: value });
-      this.filters.map(item => {
-        if (item.key === key) {
-          item['filterSelected'] = value;
+    this.filters.map(item => {
+      if (item.key === key) {
+        item['filterSelected'] = value;
 
-          if(betweenType.indexOf(filterType) !== -1) {
-            valueArr = value.split('BETWEEN|');
-            valueArr = valueArr[1];
-            valueArr = valueArr.split(",");
-            const from = this.datePipe.transform(new Date(valueArr[0]),'MMM d, y');
-            const to = this.datePipe.transform(new Date(valueArr[1]),'MMM d, y');
-            item['filterSelectedDisplay'] = `${from}-${to}`;
+        if (betweenType.indexOf(filterType) !== -1) {
+          valueArr = value.split('BETWEEN|');
+          valueArr = valueArr[1];
+          valueArr = valueArr.split(",");
+          if (filterType === 'date') {
+            from  = this.datePipe.transform(new Date(valueArr[0]), 'd MMM, y');
+            to    = this.datePipe.transform(new Date(valueArr[1]), 'd MMM, y');
           } else {
-            item['filterSelectedDisplay'] = value;
-          }          
+            from  = valueArr[0];
+            to    = valueArr[1];
+          }
+          item['filterSelectedDisplay'] = `${from} - ${to}`;
+
+        } else if (inType.indexOf(filterType) !== -1) {
+          valueArr  = value.split('IN|');
+          valueArr  = valueArr[1];
+          valueArr  = valueArr.split(",");
+          from      = valueArr[0];
+          to        = valueArr[1];
+          item['filterSelectedDisplay'] = `${from} - ${to}`;
+        } else {
+          item['filterSelectedDisplay'] = value;
         }
-      })
+      }
+    })
 
 
     // if (inType.indexOf(filterType) !== -1 && value != '') {
@@ -174,8 +189,7 @@ export class CsTableFilterComponent implements OnInit {
   filterCancelled(outputData: any) {
     this.searchArr = this.searchArr.filter(item => item.search !== outputData.key)
     this.searchArr = this.searchArr.filter(item => item.value !== '')
-    console.log('this.filters', this.filters)
-    console.log('this.outputData', outputData)
+  
     this.filters.map(item => {
       if (item.key === outputData.key) {
         item['filterSelected'] = '';

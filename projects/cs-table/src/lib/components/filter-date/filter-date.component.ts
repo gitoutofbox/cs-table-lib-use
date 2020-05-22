@@ -16,13 +16,10 @@ export class FilterDateComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.data.filterSelected);
     let filterSelectedTemp;
-    if(this.data.filterSelected && this.data.filterSelected !== '') {
-      
+    if(this.data.filterSelected && this.data.filterSelected !== '') {      
       filterSelectedTemp = (this.data.filterSelected).split('BETWEEN|');
       filterSelectedTemp = (filterSelectedTemp[1]).split(",")
-      // console.log('filterSelectedTemp', filterSelectedTemp)
       this.filterSelected = [new Date(filterSelectedTemp[0]), new Date(filterSelectedTemp[1])];
       }
   }

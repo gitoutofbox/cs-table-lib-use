@@ -25,6 +25,9 @@
     width: auto;
     height: auto;
 }
+.filter-block .bs-datepicker {
+    box-shadow: none;
+}
 ul{
     padding:0;
     margin: 0;

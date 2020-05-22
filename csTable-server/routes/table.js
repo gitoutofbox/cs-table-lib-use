@@ -27,7 +27,7 @@ exports.getData = (req, res) => {
         const LIMIT = ` LIMIT ${(pn - 1) * ps}, ${ps}`;
         let where = namespace.createFilters(search);
         sql = `SELECT * FROM ${tableNameRow[0]['table_name']}  ${where} ${LIMIT}`;
-        // console.log(sql)
+        console.log(sql)
         database.query(sql, (err, rows) => {
             if (err) { throw err; }
             res.send({
@@ -66,7 +66,7 @@ namespace = {
                
            
         }
-        console.log(where)
+        // console.log(where)
         return where;
     }
 }
