@@ -11,7 +11,10 @@ import { CsTableModule } from 'cs-table'
     BrowserModule,
     CsTableModule.forRoot({
       components: ComponentLoaderService.getComponent,
-      apiBase: 'http://localhost:8081'
+      apiBase: 'http://localhost:8081',
+      pagination: {
+        boundaryLinks: false
+      }
     }),
   ],
   providers: [],

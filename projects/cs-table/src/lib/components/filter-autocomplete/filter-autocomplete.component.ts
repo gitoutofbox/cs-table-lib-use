@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input, Inject } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { debounceTime, distinctUntilChanged, map, tap, switchMap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CsTableConfig } from '../../configs/config';
 import { CS_TABLE_TOKEN } from '../../configs/config';

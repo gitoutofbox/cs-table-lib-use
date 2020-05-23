@@ -55,6 +55,9 @@ table.cs-table tbody tr td .cell-component:last-child{
     font-weight: 600;
     cursor: pointer;
 }
+.cs-filter .filter-selection .selected-filters li:hover {
+    background: #b1b1b1;
+}
 .cs-filter .filter-selection .selected-filters li {
     background: #f9f9f9;
     border-radius: 50px;
@@ -63,10 +66,11 @@ table.cs-table tbody tr td .cell-component:last-child{
     border: 1px solid #e6e6e6;
     margin-right: 15px;
     position: relative;
+    line-height: 100%;
 }
 
 .cs-filter .filter-selection .selected-filters li .remove-filter{
-    visibility: hidden;
+    visibility: hidden;    
 }
 .cs-filter .filter-selection .selected-filters li .remove-filter:after {
     content: "x";
@@ -120,7 +124,6 @@ table.cs-table tbody tr td .cell-component:last-child{
     width: auto;
     height: 100%;
     padding: 10px 8px;
-    margin-bottom: 20px;
 }
 
 .filter-single-main .header {
@@ -130,13 +133,11 @@ table.cs-table tbody tr td .cell-component:last-child{
 }
     
 .cs-filter .filter-single-main .footer {
-    position: absolute;
     bottom: 10px;
-    padding: 10px;
+    padding: 0;
     text-align: right;
-    left:0; 
-    right: 0;    
-    height: 10px;
+    left: 0;
+    right: 0;
 }
 .cs-filter .filter-single-main .footer button {
     border: 0;
@@ -146,8 +147,16 @@ table.cs-table tbody tr td .cell-component:last-child{
     font-weight: bold;
 }
 .cs-filter .filter-single-main .bs-datepicker{
-    box-shadow: 0;
+    box-shadow: none;
 }
 /****** single filter ends *****/
 
 /******************* filter ends ***************************/
+
+
+/**************************** pagination starts ******************/
+.cs-pagination {
+    margin: 15px 0;
+    float: right;
+}
+/**************************** pagination ends  ******************/

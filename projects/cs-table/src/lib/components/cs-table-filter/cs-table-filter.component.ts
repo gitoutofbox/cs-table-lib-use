@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, ComponentFactoryResolver, ViewChild, ViewContainerRef, HostListener, Output, ElementRef, Inject, Input } from '@angular/core';
+import { Component, OnInit, EventEmitter, ComponentFactoryResolver, ViewChild, ViewContainerRef, HostListener, Output, Inject, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';

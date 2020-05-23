@@ -31,8 +31,21 @@
                 </ng-container>
             </tr>
             <tr *ngIf="tableData.length === 0">
-                <td [colSpan]="columns.length" align="center">No records found</td>
+                <td [colSpan]="columns.length + 1" align="center">No records found</td>
             </tr>
         </tbody>
     </table>
+    <div class="cs-pagination" *ngIf="pagination.enable">
+        <pagination 
+        [boundaryLinks]="pagination.boundaryLinks" 
+        [totalItems]="totalRecords"        
+        [maxSize]="pagination.maxSize"
+        [previousText]="pagination.previous" 
+        [nextText]="pagination.next" 
+        [firstText]="pagination.first" 
+        [lastText]="pagination.last"
+        [itemsPerPage]="tableConfig.ps" 
+        [(ngModel)]="tableConfig.pn"
+        (pageChanged)="pageChanged($event)"></pagination>
+    </div>
 </ng-container>

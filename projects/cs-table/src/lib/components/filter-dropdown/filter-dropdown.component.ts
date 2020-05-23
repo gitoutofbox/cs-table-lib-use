@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CsTableConfig } from '../../configs/config';
 import { CS_TABLE_TOKEN } from '../../configs/config';

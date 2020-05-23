@@ -8,6 +8,8 @@ import { DatePipe } from '@angular/common';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+
 
 import {CS_TABLE_TOKEN} from './configs/config';
 import {CsTableConfig} from './configs/config';
@@ -34,6 +36,7 @@ import { FilterNumberComponent } from './components/filter-number/filter-number.
     FormsModule,
     BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
+    PaginationModule.forRoot()
   ],
   providers: [DatePipe],
   exports: [
