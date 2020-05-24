@@ -24,18 +24,24 @@ exports.getData = (req, res) => {
         const pn = req.body.pn;
         const ps = req.body.ps;
         const search = req.body.search;
+        const sort = req.body.sort;
         const LIMIT = ` LIMIT ${(pn - 1) * ps}, ${ps}`;
-        let where = namespace.createFilters(search);
-        sql = `SELECT * FROM ${tableNameRow[0]['table_name']}  ${where} ${LIMIT}`;
-        console.log(sql)
+        const WHERE = namespace.createFilters(search);
+        const ORDER_BY = namespace.createOrderBy(sort);
+        sql = `SELECT * FROM ${tableNameRow[0]['table_name']}  ${WHERE} ${ORDER_BY} ${LIMIT}`;
+        // console.log(sql)
         database.query(sql, (err, rows) => {
             if (err) { throw err; }
+            sql = `SELECT count(*) as total_rows FROM ${tableNameRow[0]['table_name']}  ${WHERE}`;
+            database.query(sql, (err, totalRows) => {
+                if (err) { throw err; }
             res.send({
                 "status": "success",
                 data: {
                     "rows": rows,
-                    "totalRows": 100
+                    "totalRows": totalRows[0]['total_rows']
                 }
+            });
             });
         });
     })
@@ -68,5 +74,16 @@ namespace = {
         }
         // console.log(where)
         return where;
+    },
+    createOrderBy: (sort) => {
+        let orderBy = ' ';
+        if(sort && sort.sortBy && (sort.sortBy).trim() !== '') {
+            orderBy = `ORDER BY ${sort.sortBy} `;
+
+            if(sort.sortType && (sort.sortType).trim() !== '') {
+                orderBy = `${orderBy} ${sort.sortType}`;
+            }
+        }
+        return orderBy;
     }
 }

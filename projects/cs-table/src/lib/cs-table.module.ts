@@ -16,7 +16,6 @@ import {CsTableConfig} from './configs/config';
 
 import { CsTableFilterComponent } from './components/cs-table-filter/cs-table-filter.component';
 import { FilterDropdownComponent } from './components/filter-dropdown/filter-dropdown.component';
-import { FilterTextComponent } from './components/filter-text/filter-text.component';
 import { FilterAutocompleteComponent } from './components/filter-autocomplete/filter-autocomplete.component';
 import { FilterDateComponent } from './components/filter-date/filter-date.component';
 import { FilterNumberComponent } from './components/filter-number/filter-number.component';
@@ -26,8 +25,7 @@ import { FilterNumberComponent } from './components/filter-number/filter-number.
     CsTableComponent, 
     ComponentLoaderComponent, 
     CsTableFilterComponent, 
-    FilterDropdownComponent, 
-    FilterTextComponent, 
+    FilterDropdownComponent,  
     FilterAutocompleteComponent, FilterDateComponent, FilterNumberComponent
   ],
   imports: [
@@ -43,8 +41,7 @@ import { FilterNumberComponent } from './components/filter-number/filter-number.
     CsTableComponent, 
     ComponentLoaderComponent, 
     CsTableFilterComponent, 
-    FilterDropdownComponent, 
-    FilterTextComponent, 
+    FilterDropdownComponent,  
     FilterAutocompleteComponent
   ]
 })

@@ -1,8 +1,6 @@
-import { Component, OnInit, Input, SimpleChanges, Output, EventEmitter, Inject } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-// import { CS_TABLE_TOKEN } from '../../configs/config';
+import { Component, Input, SimpleChanges, Output, EventEmitter, Inject } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { CsTableConfig, CS_TABLE_TOKEN, Pagination } from '../../configs/config';
-import { map } from 'rxjs/operators';
 import { Observable, of } from 'rxjs';
 
 interface TableConfig {
@@ -16,7 +14,7 @@ interface TableConfig {
   templateUrl: './cs-table.component.html',
   styleUrls: ['./cs-table.component.css']
 })
-export class CsTableComponent implements OnInit {
+export class CsTableComponent {
   public components;
   private apiBase: string;
   public pageId: string;
@@ -36,12 +34,14 @@ export class CsTableComponent implements OnInit {
     first: 'First',
     last: 'Last'
   }
-  
+  public sortBy: string = '';
+  public sortType: string = '';
+
   constructor(
     private http: HttpClient,
     @Inject(CS_TABLE_TOKEN) private csTableConfig: CsTableConfig
   ) {
-    console.log(this.csTableConfig)
+    // console.log(this.csTableConfig)
     this.components = this.csTableConfig.components;
     this.apiBase = this.csTableConfig.apiBase;
     if(this.csTableConfig.pagination) {
@@ -75,6 +75,12 @@ export class CsTableComponent implements OnInit {
         this.getColumns().subscribe(resp => {
           if (resp['data'] && resp['data']['columns'].length) {
             this.columns = resp['data'].columns;
+            for(let i=0; i<this.columns.length; i++) {
+              if(this.columns[i]['sorting_enable'] && this.columns[i]['sorted']) {
+                this.sortBy = this.columns[i]['key'];
+                this.sortType =this.columns[i]['sort_type'];
+              }
+            }
             this.loadTableData();
           }
         })
@@ -83,9 +89,9 @@ export class CsTableComponent implements OnInit {
       }
     }
   }
-  ngOnInit(): void {
-    // this.get();
-  }
+  // ngOnInit(): void {
+  //   // this.get();
+  // }
   parseConfigurations() {
     this.tableConfig = JSON.parse(this.config);
     this.pageId = this.tableConfig.pageId;
@@ -103,7 +109,8 @@ export class CsTableComponent implements OnInit {
     const postData = {
       "ps": this.tableConfig.ps ? this.tableConfig.ps : 10,
       "pn": this.tableConfig.pn ? this.tableConfig.pn : 1,
-      "search": this.tableConfig.search ? this.tableConfig.search : ''
+      "search": this.tableConfig.search ? this.tableConfig.search : '',
+      "sort": {sortBy: this.sortBy, sortType: this.sortType}
     }
     const url = `${this.apiBase}/table/${this.pageId}`;
     this.http.post(url, postData).subscribe(resp => {
@@ -111,6 +118,13 @@ export class CsTableComponent implements OnInit {
       this.totalRecords = resp['data']['totalRows'];
       this.tableData = rows;
     })
+  }
+  doSort(col) {
+    if(col.sorting_enable) {
+      this.sortBy = col.key;
+      this.sortType = this.sortType == 'asc' ? 'desc' : 'asc';
+      this.loadTableData();
+    }
   }
   pageChanged(data) {
     this.tableConfig.pn = data.page;

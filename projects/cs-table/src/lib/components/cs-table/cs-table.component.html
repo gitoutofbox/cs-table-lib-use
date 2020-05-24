@@ -3,7 +3,7 @@
         <thead>
             <tr>
                 <th><input type="checkbox" (change)="checkAll($event)" /></th>
-                <th *ngFor="let col of columns" [width]="col.width">
+                <th *ngFor="let col of columns" [width]="col.width" (click)="doSort(col)" [ngClass]="{'sortable': col.sorting_enable, 'sort-asc' : (sortBy === col.key && sortType === 'asc'), 'sort-desc' : (sortBy === col.key && sortType === 'desc')}">
                     {{col.label}}
                 </th>
             </tr>

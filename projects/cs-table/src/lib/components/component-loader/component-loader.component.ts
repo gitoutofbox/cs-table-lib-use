@@ -1,10 +1,10 @@
-import { Component,ViewContainerRef,  Input, OnInit, ViewChild, ComponentFactoryResolver, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component,ViewContainerRef,  Input, ViewChild, ComponentFactoryResolver } from '@angular/core';
 @Component({
   selector: 'app-component-loader',
   templateUrl: './component-loader.component.html',
   styleUrls: ['./component-loader.component.css']
 })
-export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ComponentLoaderComponent  {
   @Input() component: any;
   @Input() data: any;
   @Input() availableComponents: any;
@@ -14,13 +14,10 @@ export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewIni
   ngAfterViewInit() {
     this.loadComponent();
   }
-  ngOnInit() {
-    // this.components = [];//this.componentLoaderService.getComponent();
-  }
+  // ngOnInit() {
+  //   // this.components = [];//this.componentLoaderService.getComponent();
+  // }
 
-  ngOnDestroy() {
-    
-  }
 
   
   loadComponent() {
@@ -28,9 +25,9 @@ export class ComponentLoaderComponent implements OnInit, OnDestroy, AfterViewIni
       // for(const component of this.component) {
         const componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.availableComponents[this.component]);
         const componentRef = this.componentHost.createComponent(componentFactory);
-        setTimeout(()=> {
+        //setTimeout(()=> {
           (<any>componentRef.instance).data = this.data;
-        },10);
+        //},10);
       // }
     }
   }

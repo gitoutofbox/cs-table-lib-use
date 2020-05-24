@@ -2,7 +2,6 @@ import { Component, OnInit, EventEmitter, ComponentFactoryResolver, ViewChild, V
 import { HttpClient } from '@angular/common/http';
 
 import { FilterDropdownComponent } from '../filter-dropdown/filter-dropdown.component';
-import { FilterTextComponent } from '../filter-text/filter-text.component';
 import { FilterAutocompleteComponent } from '../filter-autocomplete/filter-autocomplete.component';
 import { FilterDateComponent } from '../filter-date/filter-date.component';
 
@@ -39,7 +38,6 @@ export class CsTableFilterComponent implements OnInit {
   private componentRef;
   private componentMapping: Object = {
     dropdown: FilterDropdownComponent,
-    text: FilterTextComponent,
     autocomplete: FilterAutocompleteComponent,
     date: FilterDateComponent,
     number: FilterNumberComponent

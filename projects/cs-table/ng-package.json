@@ -4,7 +4,8 @@
   "lib": {
     "entryFile": "src/public-api.ts",
     "umdModuleIds": {
-      "datepicker": "ngx-bootstrap/datepicker"
+      "ngx-bootstrap/datepicker": "ngx-bootstrap.datepicker",
+      "ngx-bootstrap/pagination": "ngx-bootstrap.pagination"
     }
   }
 }

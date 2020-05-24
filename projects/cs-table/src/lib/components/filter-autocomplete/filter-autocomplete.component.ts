@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output, Input, Inject } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { CsTableConfig } from '../../configs/config';

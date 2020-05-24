@@ -1,63 +1,106 @@
 /******************* table starts ***************************/
 table.cs-table {
     border: 1px solid #aaa;
-    padding:0;
+    padding: 0;
     border-collapse: separate;
     border-spacing: 0px;
 }
+
 table.cs-table thead tr {
     background: #000;
     color: #fff;
 }
-table.cs-table tbody tr:hover {background-color: #ddd;}
-table.cs-table thead tr th{
+
+table.cs-table tbody tr:hover {
+    background-color: #ddd;
+}
+
+table.cs-table thead tr th {
     border-left: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding: 10px;
     text-align: left;
     border-spacing: 0;
+    position: relative;
 }
-table.cs-table thead tr th:first-child{
+table.cs-table thead tr th.sortable {
+    cursor: pointer;
+}
+table.cs-table thead tr th:first-child {
     border-left: 0;
 }
+
+table.cs-table thead tr th.sort-asc:after {
+    content: " ";
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid #fff;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 10px;
+}
+
+table.cs-table thead tr th.sort-desc:after {
+    content: " ";
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid #fff;
+    position: absolute;
+    top: calc(50% - 5px);
+    right: 10px;
+}
+
 table.cs-table tbody tr {
     background: #fff;
 }
+
 table.cs-table tbody tr:nth-child(even) {
     background: #f2f2f2;
 }
-table.cs-table tbody tr td{
+
+table.cs-table tbody tr td {
     border-left: 1px solid #aaa;
     border-bottom: 1px solid #aaa;
     padding: 10px;
     border-spacing: 0;
 }
-table.cs-table tbody tr td:first-child{
+
+table.cs-table tbody tr td:first-child {
     border-left: 0;
 }
+
 table.cs-table tbody tr td .cell-component {
-    padding-right:10px;
+    padding-right: 10px;
     cursor: pointer;
 }
+
 table.cs-table tbody tr td .cell-component:hover {
     color: #b5b0b0;
 }
-table.cs-table tbody tr td .cell-component:last-child{
+
+table.cs-table tbody tr td .cell-component:last-child {
     padding-right: 0;
 }
+
 /******************* table ends ***************************/
 
 /******************* filiter starts ***************************/
-.cs-filter .add-filter-btn{
-    border:0;
+.cs-filter .add-filter-btn {
+    border: 0;
     background: transparent;
     color: blue;
     font-weight: 600;
     cursor: pointer;
 }
+
 .cs-filter .filter-selection .selected-filters li:hover {
     background: #b1b1b1;
 }
+
 .cs-filter .filter-selection .selected-filters li {
     background: #f9f9f9;
     border-radius: 50px;
@@ -69,9 +112,10 @@ table.cs-table tbody tr td .cell-component:last-child{
     line-height: 100%;
 }
 
-.cs-filter .filter-selection .selected-filters li .remove-filter{
-    visibility: hidden;    
+.cs-filter .filter-selection .selected-filters li .remove-filter {
+    visibility: hidden;
 }
+
 .cs-filter .filter-selection .selected-filters li .remove-filter:after {
     content: "x";
     text-align: center;
@@ -84,27 +128,31 @@ table.cs-table tbody tr td .cell-component:last-child{
     background: #c3bfbf;
     visibility: visible;
 }
+
 .cs-filter .filter-selection .selected-filters li .remove-filter:hover:after {
     background: #b38e8e;
 }
 
 /****** single filter starts *****/
 .cs-filter .filter-block {
-    width:200px;
-   
+    width: 200px;
+
     background: #fff;
     height: 120px;
     box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4);
 }
-.cs-filter .filter-block .all-filters .header{
+
+.cs-filter .filter-block .all-filters .header {
     background: #000;
-    color:#fff;   
+    color: #fff;
     padding: 8px;
 }
-.cs-filter .filter-block .all-filters .available-filters{
+
+.cs-filter .filter-block .all-filters .available-filters {
     height: 100%;
     padding: 10px 8px;
 }
+
 /* .filter-block .close {
     color:#fff;
     z-index: 2;
@@ -113,13 +161,15 @@ table.cs-table tbody tr td .cell-component:last-child{
 .cs-filter .filter-single-main {
     position: relative;
     width: 100%;
-    float:left;
+    float: left;
 }
-.cs-filter .filter-single-main select, 
+
+.cs-filter .filter-single-main select,
 .cs-filter .filter-single-main input,
 .cs-filter .filter-single-main number {
     width: 100%;
 }
+
 .cs-filter .filter-single-main .body {
     width: auto;
     height: 100%;
@@ -128,10 +178,10 @@ table.cs-table tbody tr td .cell-component:last-child{
 
 .filter-single-main .header {
     background: #000;
-    color:#fff;   
+    color: #fff;
     padding: 8px;
 }
-    
+
 .cs-filter .filter-single-main .footer {
     bottom: 10px;
     padding: 0;
@@ -139,6 +189,7 @@ table.cs-table tbody tr td .cell-component:last-child{
     left: 0;
     right: 0;
 }
+
 .cs-filter .filter-single-main .footer button {
     border: 0;
     background: transparent;
@@ -146,9 +197,11 @@ table.cs-table tbody tr td .cell-component:last-child{
     cursor: pointer;
     font-weight: bold;
 }
-.cs-filter .filter-single-main .bs-datepicker{
+
+.cs-filter .filter-single-main .bs-datepicker {
     box-shadow: none;
 }
+
 /****** single filter ends *****/
 
 /******************* filter ends ***************************/
@@ -159,4 +212,5 @@ table.cs-table tbody tr td .cell-component:last-child{
     margin: 15px 0;
     float: right;
 }
+
 /**************************** pagination ends  ******************/
