@@ -1,5 +1,5 @@
 exports.getFilters = (req, res) => {
-    let where = ` WHERE page_id=${req.params.page_id}`;
+    let where = ` WHERE page_id="${req.params.page_id}"`;
     const sql = `SELECT columns FROM arc_tables ${where}`;
     // console.log(sql)
     database.query(sql, (err, rows) => {
@@ -31,7 +31,7 @@ exports.getFilterOptions = (req, res) => {
     const key = req.body.key;
     const search = req.body.search;
     
-    let sql = `SELECT table_name FROM  arc_table_page WHERE page_id = ${page_id}`;
+    let sql = `SELECT table_name FROM  arc_table_page WHERE page_id = "${page_id}"`;
     console.log(sql);
     database.query(sql, (err, tableNameRow) => {
         if (err) { throw err; }

@@ -1,12 +1,12 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+// import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { CsTableComponent } from './components/cs-table/cs-table.component';
 import { ComponentLoaderComponent } from './components/component-loader/component-loader.component';
 import { DatePipe } from '@angular/common';
 
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 
@@ -30,9 +30,9 @@ import { FilterNumberComponent } from './components/filter-number/filter-number.
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
+    // HttpClientModule,
     FormsModule,
-    BrowserAnimationsModule,
+    // BrowserAnimationsModule,
     BsDatepickerModule.forRoot(),
     PaginationModule.forRoot()
   ],
