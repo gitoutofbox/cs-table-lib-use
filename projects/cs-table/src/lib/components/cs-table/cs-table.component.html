@@ -16,7 +16,12 @@
                         <div *ngIf="col.type === 'component'; else textField">
 
                             <span class="cell-component" *ngFor="let component of col.components">
-                                <app-component-loader [component]="component" [availableComponents]="components" [data]="row">
+                                <app-component-loader 
+                                [component]="component" 
+                                [availableComponents]="components" 
+                                [data]="row"
+                                [key]="col.key"
+                                >
                                 </app-component-loader>
                             </span>
                             

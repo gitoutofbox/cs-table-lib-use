@@ -32,7 +32,7 @@ exports.getFilterOptions = (req, res) => {
     const search = req.body.search;
     
     let sql = `SELECT table_name FROM  arc_table_page WHERE page_id = "${page_id}"`;
-    console.log(sql);
+    //console.log(sql);
     database.query(sql, (err, tableNameRow) => {
         if (err) { throw err; }
 
@@ -41,7 +41,7 @@ exports.getFilterOptions = (req, res) => {
             where = `${where} AND ${key} LIKE '%${search}%'`;
         }
         sql = `SELECT user_id, ${key} FROM ${tableNameRow[0]['table_name']} ${where}`;
-        console.log(sql)
+        //console.log(sql)
         database.query(sql, (err, rows) => {
             if (err) { throw err; }
             res.send({
